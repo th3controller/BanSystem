@@ -1,0 +1,9 @@
+name: BanSystem
+version: 1.0.0
+main: us.th3controller.bansystem.BanSystem
+author: th3controller
+commands:
+  ban:
+    description: Bans the specified player
+    usage: /<command> (player) [reason]
+    aliases: bannish
