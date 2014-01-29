@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import us.th3controller.bansystem.commands.CmdBan;
+import us.th3controller.bansystem.commands.CmdKick;
+import us.th3controller.bansystem.commands.CmdTempBan;
 
 public class BanSystem extends JavaPlugin {
 	
@@ -19,6 +22,9 @@ public class BanSystem extends JavaPlugin {
 	
 	public void onEnable() {
 		banStart();
+		getCommands();
+		banlist = YamlConfiguration.loadConfiguration(banfile);
+		getServer().getPluginManager().registerEvents(new BanSystemListener(this), this);
 		log.info("[BanSystem] Successfully initiated!");
 	}
 	public void onDisable() {
@@ -26,16 +32,17 @@ public class BanSystem extends JavaPlugin {
 		log.info("[BanSystem] Successfully terminated!");
 	}
 	public void banStart() {
-		banfile = new File("plugins/SimplerThanEssentials", "banned.yml");
+		banfile = new File("plugins/BanSystem", "banned.yml");
+		File bandir = new File("plugins", "BanSystem");
 		if(!banfile.exists()) {
 			try {
+				bandir.mkdir();
 				banfile.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		banlist = YamlConfiguration.loadConfiguration(banfile);
 	}
 	public static void saveBan() {
 		try {
@@ -46,9 +53,11 @@ public class BanSystem extends JavaPlugin {
 		}
 	}
 	public void getCommands() {
-		getCommand("ban", new CmdBan(this));
+		getCommand("tempban", new CmdTempBan());
+		getCommand("kick", new CmdKick());
+		getCommand("ban", new CmdBan());
 	}
 	public void getCommand(String command, CommandExecutor commandexecutor) {
-		getCommand(command).setExecutor(commandexecutor);
+		Bukkit.getServer().getPluginCommand(command).setExecutor(commandexecutor);
 	}
 }

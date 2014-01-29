@@ -7,3 +7,6 @@ commands:
     description: Bans the specified player
     usage: /<command> (player) [reason]
     aliases: bannish
+  kick:
+    description: Kicks the specified player
+    usage: /<command> (player) [reason]
