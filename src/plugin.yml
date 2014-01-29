@@ -10,3 +10,6 @@ commands:
   kick:
     description: Kicks the specified player
     usage: /<command> (player) [reason]
+  tempban:
+    description: Temporarily bans the specified player
+    usage: /<command> (player) [reason]

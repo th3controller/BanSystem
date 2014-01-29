@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import us.th3controller.bansystem.BanSystem;
+import us.th3controller.bansystem.FileSystem;
 import us.th3controller.bansystem.Messages;
 
 public class CmdBan implements CommandExecutor {
@@ -21,9 +21,9 @@ public class CmdBan implements CommandExecutor {
 					for (int i = 1; i < args.length; i++) {
 						reason = reason + " " + args[i];
 					}
-					BanSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", reason);
-					BanSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
-					BanSystem.saveBan();
+					FileSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", reason);
+					FileSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
+					FileSystem.saveBan();
 					sender.sendMessage(args[0]+" has been banned. Reason:"+reason);
 					if(target != null) {
 						target.kickPlayer("You have been banned, reason:"+reason);
@@ -31,9 +31,9 @@ public class CmdBan implements CommandExecutor {
 				}
 				else if(args.length == 1) {
 					Player target = Bukkit.getServer().getPlayer(args[0]);
-					BanSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", "Undefined");
-					BanSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
-					BanSystem.saveBan();
+					FileSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", "Undefined");
+					FileSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
+					FileSystem.saveBan();
 					sender.sendMessage(args[0]+" has been banned. Reason: Undefined");
 					if(target != null) {
 						target.kickPlayer("You have been banned, reason: Undefined");
@@ -52,9 +52,9 @@ public class CmdBan implements CommandExecutor {
 				for (int i = 1; i < args.length; i++) {
 					reason = reason + " " + args[i];
 				}
-				BanSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", reason);
-				BanSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
-				BanSystem.saveBan();
+				FileSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", reason);
+				FileSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
+				FileSystem.saveBan();
 				sender.sendMessage(args[0]+" has been banned. Reason:"+reason);
 				if(target != null) {
 					target.kickPlayer("You have been banned, reason:"+reason);
@@ -62,9 +62,9 @@ public class CmdBan implements CommandExecutor {
 			}
 			else if(args.length == 1) {
 				Player target = Bukkit.getServer().getPlayer(args[0]);
-				BanSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", "Undefined");
-				BanSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
-				BanSystem.saveBan();
+				FileSystem.banlist.set("banned."+args[0].toLowerCase()+".reason", "Undefined");
+				FileSystem.banlist.set("banned."+args[0].toLowerCase()+".issuer", sender.getName());
+				FileSystem.saveBan();
 				sender.sendMessage(args[0]+" has been banned. Reason: Undefined");
 				if(target != null) {
 					target.kickPlayer("You have been banned, reason: Undefined");

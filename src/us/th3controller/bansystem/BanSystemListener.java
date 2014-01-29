@@ -17,8 +17,8 @@ public class BanSystemListener implements Listener {
 	}
 	@EventHandler(priority = EventPriority.HIGH)
 	public void PlayerLogin(PlayerLoginEvent event) {
-		String reason = BanSystem.banlist.getString("banned."+event.getPlayer().getName().toLowerCase()+".reason");
-		Set<String> players = BanSystem.banlist.getConfigurationSection("banned").getKeys(false);
+		String reason = FileSystem.banlist.getString("banned."+event.getPlayer().getName().toLowerCase()+".reason");
+		Set<String> players = FileSystem.banlist.getConfigurationSection("banned").getKeys(false);
 		if(players.contains(event.getPlayer().getName().toLowerCase())) {
 			event.disallow(Result.KICK_BANNED, "You are banned, reason: "+reason);
 		}
